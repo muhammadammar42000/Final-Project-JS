@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sign up / Login Form</title>
+
+	<!-- font awesom icon -->
+	<script src="https://kit.fontawesome.com/d7e0398109.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="./style.css">
+	<!-- google Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+	<!-- partial:index.partial.html -->
+
+	<body>
+		<div id="main" class="main">
+			<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="signup">
+				<form>
+					<label for="chk" aria-hidden="true">Sign up</label>
+					<input id="nameBar" type="text" name="txt" placeholder="User name" required="">
+					<input id="emailBar" type="email" name="email" placeholder="Email" required="">
+					<input id="passBar" type="password" name="pswd" placeholder="Password" required="">
+					<button id="signUpBtn" type="submit" value="Submit">Sign up</button>
+				</form>
+			</div>
+
+			<div class="login">
+				<form>
+					<label for="chk" aria-hidden="true">Login</label>
+					<input id="loginEmail" type="email" name="email" placeholder="Email" required="">
+					<input id="loginPassword" type="password" name="pswd" placeholder="Password" required="">
+					<button id="loginBtn">Login</button>
+					<div class="signinWithGoogle">
+						<button class="withGoogle" id="loginWithGoogle"><span class="logo">
+								<i class="fa-brands fa-google">
+								</i>
+							</span> Sign in with Google</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+
+	<script src="../../Firebase/ConnectFirebase.js"></script>
+	<script src="./login.js"></script>
+</body>
+
+</html>
