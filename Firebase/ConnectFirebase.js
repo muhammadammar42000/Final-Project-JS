@@ -10,31 +10,34 @@ const firebaseConfig = {
 };
 
 
-var connectFirebase = (auth = false, firestore = false, storage = false) => {
-    let script = document.createElement('script');
-    script.src = "https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js";
-    script.id = "firebase-source-script";
-    document.body.prepend(script);
-    //for auth integration
-    if (auth) {
-        let script = document.createElement('script');
-        script.src = "https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js";
-        document.body.prepend(script);
-    }
-    //for firstore integration
-    if (firestore) {
-        let script = document.createElement('script');
-        script.src = "https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js";
-        document.body.prepend(script);
-    }
-    //for storage integration
-    if (storage) {
-        let script = document.createElement('script');
-        script.src = "https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js";
-        document.body.prepend(script);
-    }
+var connectFirebase = async (auth = false, firestore = false, storage = false, func) => {
 
-    document.getElementById('firebase-source-script').addEventListener('load', () => {
-        firebase.initializeApp(firebaseConfig);
-    });
+    await addScriptInDOM("https://www.gstatic.com/firebasejs/7.15.1/firebase-app.js", "firebase-source-scr");
+
+    if (auth) await addScriptInDOM("https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js", "auth-firebase-scr");
+
+    if (firestore) await addScriptInDOM("https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js", "firestore-firebase-scr");
+
+    if (storage) await addScriptInDOM("https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js", "storage-firebase-scr");
+
+    firebase.initializeApp(firebaseConfig);
+    
+    if (func) func();
+}
+
+var addScriptInDOM = async (url, id) => {
+
+    return new Promise((resolve, reject) => {
+
+        let script = document.createElement('script');
+        script.src = url;
+        script.id = id;
+        document.body.prepend(script);
+
+        document.getElementById(id).addEventListener('load', () => {
+            resolve();
+            return;
+        });
+        setTimeout(reject, 10000);
+    })
 }
